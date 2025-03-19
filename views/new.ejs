@@ -1,0 +1,30 @@
+<h2>Create a New Post</h2>
+<form action="/posts" method="POST">
+    <label>Title:</label>
+    <input type="text" name="title" required>
+    
+    <label>Content:</label>
+    <textarea id="postContent" name="content" required oninput="updateCharCount()"></textarea>
+    <p id="charCount">0 / 280</p>
+
+    <button type="submit" id="submitBtn" disabled>Publish</button>
+</form>
+
+<script>
+    function updateCharCount() {
+        const content = document.getElementById("postContent");
+        const charCount = document.getElementById("charCount");
+        const submitBtn = document.getElementById("submitBtn");
+
+        let length = content.value.length;
+        charCount.textContent = length + " / 280";
+
+        if (length > 280) {
+            charCount.style.color = "red";
+            submitBtn.disabled = true;
+        } else {
+            charCount.style.color = "black";
+            submitBtn.disabled = false;
+        }
+    }
+</script>

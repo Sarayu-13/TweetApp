@@ -1,0 +1,30 @@
+<div class="abc">
+    <h2>New Posts</h2>
+    
+    <% if (posts.length === 0) { %>
+        <p>No posts yet. <a href="/new">Create one</a>!</p>
+    <% } else { %>
+        <ul>
+            <% posts.forEach(post => { %>
+                <li>
+                    <h3><%= post.title %></h3>
+                    <p><%= post.content %></p>
+                    
+                    <a href="/posts/<%= post.id %>/edit">
+                        <button class="edit-btn">Edit</button>
+                    </a>
+    
+                    <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button class="delete-btn" type="submit">Delete</button>
+                    </form>
+                    
+                    <a href="https://twitter.com/intent/tweet?text=<%= encodeURIComponent(post.title + ' - ' + post.content) %>"
+                       target="_blank" rel="noopener noreferrer">
+                        <button class="tweet-btn">Tweet</button>
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
+    <% } %>
+    </div>
+    
